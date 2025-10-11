@@ -1,0 +1,12 @@
+.chat-panel { height:100%; display:flex; flex-direction:column; border-left:1px solid #e9eef6; background:#fff; min-height: 0 }
+.chat-panel-header { display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:#075E54; color:#fff }
+.chat-panel-body { flex:1; padding:12px; background:transparent; overflow:auto }
+.chat-panel-close { border:none; background:transparent; font-size:18px; cursor:pointer; color:#fff }
+
+/* small floating chat button */
+.chat-toggle-btn { position:fixed; right:18px; bottom:18px; background:#075E54; color:#fff; width:56px; height:56px; border-radius:28px; display:grid; place-items:center; box-shadow:0 8px 20px rgba(0,0,0,0.16); border:none; cursor:pointer; z-index:1400 }
+.chat-toggle-btn.close { background:#c62828 }
+
+@media (max-width:900px){
+  .chat-panel { position:fixed; right:0; left:0; bottom:0; top:64px; z-index:1300 }
+}

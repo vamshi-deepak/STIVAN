@@ -1,0 +1,29 @@
+.landing-root { min-height:100vh; display:flex; flex-direction:column; background: linear-gradient(180deg,#fbfdff 0%, #f3f7fb 100%); }
+.landing-header { height:64px; display:flex; align-items:center; padding:0 28px; }
+.landing-header .brand { font-weight:800; color:#6a00f4; font-size:20px; }
+.landing-hero { display:flex; gap:48px; align-items:center; justify-content:center; flex:1; padding:48px; }
+.hero-left { max-width:640px; }
+.hero-left h1 { font-size:48px; margin:0 0 12px; color:#202124 }
+.lead { color:#4b5563; font-size:18px; margin-bottom:20px }
+.cta-row { display:flex; gap:12px }
+.primary-cta { background:linear-gradient(90deg,#6a00f4,#4c00d6); color:#fff; border:none; padding:12px 20px; border-radius:10px; font-weight:600; cursor:pointer }
+.secondary-cta { background:#fff; border:1px solid var(--primary-color); color:var(--primary-color); padding:10px 18px; border-radius:10px; cursor:pointer; font-weight:600 }
+.hero-right { width:420px; display:flex; align-items:center; justify-content:center }
+.device { width:320px; height:220px; background: linear-gradient(180deg,#fff,#f7fbff); border-radius:18px; display:flex; align-items:center; justify-content:center; box-shadow: 0 18px 40px rgba(16,24,40,0.06); position:relative }
+.screen { width:90%; height:70%; background: #e8f0ff; border-radius:12px; position:relative; overflow:hidden }
+.floating-bubble { position:absolute; border-radius:12px; opacity:0.95 }
+.floating-bubble.b1 { width:120px; height:44px; background:linear-gradient(90deg,#6a00f4,#4c00d6); left:8px; top:20px; transform:translateX(-8px); animation: float1 4s ease-in-out infinite }
+.floating-bubble.b2 { width:160px; height:34px; background:linear-gradient(90deg,#00b894,#00cec9); right:12px; top:48px; animation: float2 5s ease-in-out infinite }
+.floating-bubble.b3 { width:90px; height:22px; background:linear-gradient(90deg,#ff9f43,#ff6b6b); left:28px; bottom:18px; animation: float3 3.6s ease-in-out infinite }
+
+@keyframes float1 { 0% { transform: translateY(0) } 50% { transform: translateY(-8px) } 100% { transform: translateY(0) } }
+@keyframes float2 { 0% { transform: translateY(0) } 50% { transform: translateY(-10px) } 100% { transform: translateY(0) } }
+@keyframes float3 { 0% { transform: translateY(0) } 50% { transform: translateY(-6px) } 100% { transform: translateY(0) } }
+
+.landing-footer { text-align:center; padding:18px 0; color:#6b7280 }
+
+@media (max-width:900px){
+  .landing-hero { flex-direction:column; padding:28px }
+  .hero-right { width:100% }
+  .hero-left h1 { font-size:32px }
+}
