@@ -1,0 +1,111 @@
+.auth-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  background-image:
+    linear-gradient(rgba(106, 17, 203, 0.8), rgba(37, 117, 252, 0.8)),
+    url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80&w=1932');
+  background-size: cover;
+  background-position: center;
+}
+
+.auth-card {
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  width: 100%;
+  max-width: 420px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.auth-header h2 {
+  font-size: 2rem;
+  color: var(--text-color);
+}
+
+.auth-header p {
+  color: var(--text-secondary);
+}
+
+/* Re-use input-group styles */
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+/* Professional curved input styles (shared with Login) */
+.input-group {
+  position: relative;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  background: rgba(247,250,252,0.9);
+  border-radius: 12px;
+  padding: 8px 12px;
+  border: 1px solid rgba(15,23,42,0.06);
+  box-shadow: 0 4px 14px rgba(2,6,23,0.06);
+}
+.input-group .input-icon {
+  color: rgba(15,23,42,0.45);
+  margin-right: 8px;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.input-group input {
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 12px 8px;
+  font-size: 0.98rem;
+  color: var(--text-color);
+  width: 100%;
+}
+.input-group .toggle-password {
+  margin-left: 8px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px; /* equal padding */
+  border-radius: 8px;
+  background: #2ecc71; /* green background */
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 4px 10px rgba(46,204,113,0.12);
+}
+.input-group:focus-within {
+  border-color: var(--primary-color);
+  box-shadow: 0 6px 24px rgba(99,102,241,0.08);
+}
+.input-group input::placeholder {
+  color: rgba(15,23,42,0.4);
+}
+
+.auth-button {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.auth-switch-link {
+  margin-top: 25px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+/* ... keep other styles like message-box ... */
