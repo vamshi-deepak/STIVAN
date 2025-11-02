@@ -1,0 +1,370 @@
+/* ===========================
+   GOOEY NAV - Fluid Morphing Navigation
+   =========================== */
+
+.gooey-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9990;
+  padding: 12px 16px 20px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(10, 10, 20, 0.95) 20%,
+    rgba(10, 10, 20, 0.98) 100%
+  );
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  display: none; /* Hidden by default, shown on mobile/tablet */
+}
+
+/* Show on mobile and tablet */
+@media (max-width: 1024px) {
+  .gooey-nav {
+    display: block;
+  }
+}
+
+/* Optional: Show on desktop at bottom-center as supplementary nav */
+@media (min-width: 1025px) {
+  .gooey-nav {
+    display: none; /* Change to 'flex' if you want it on desktop */
+    justify-content: center;
+    padding: 16px;
+  }
+  
+  .gooey-nav-container {
+    max-width: 600px;
+  }
+}
+
+.gooey-nav-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: rgba(15, 15, 30, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 32px;
+  padding: 12px 8px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  overflow: visible;
+}
+
+/* Gooey Blob Container - Applies the gooey filter effect */
+.gooey-blob-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  filter: url(#gooey-effect);
+  position: relative;
+  z-index: 2;
+}
+
+/* Animated Indicator (Background Blob) */
+.gooey-indicator {
+  position: absolute;
+  height: 56px;
+  background: var(--active-color, #667eea);
+  border-radius: 28px;
+  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  z-index: 1;
+  box-shadow: 
+    0 4px 20px var(--active-color, #667eea),
+    0 0 40px var(--active-color, #667eea);
+  opacity: 0.3;
+  filter: blur(8px);
+}
+
+/* Gooey Nav Item */
+.gooey-nav-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px 12px;
+  min-width: 64px;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 3;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.gooey-icon-wrapper {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
+}
+
+.gooey-icon-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--item-color, #667eea);
+  opacity: 0;
+  border-radius: 50%;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+}
+
+.gooey-icon-wrapper i {
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  z-index: 2;
+}
+
+.gooey-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.4s ease;
+  white-space: nowrap;
+}
+
+/* Hover State - Gooey Morph Effect */
+.gooey-nav-item:hover .gooey-icon-wrapper {
+  transform: scale(1.15);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--item-color, #667eea);
+  box-shadow: 
+    0 0 20px var(--item-color, #667eea),
+    0 0 40px var(--item-color, #667eea);
+}
+
+.gooey-nav-item:hover .gooey-icon-wrapper::before {
+  opacity: 0.2;
+}
+
+.gooey-nav-item:hover .gooey-icon-wrapper i {
+  color: #ffffff;
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px var(--item-color, #667eea));
+}
+
+.gooey-nav-item:hover .gooey-label {
+  color: var(--item-color, #667eea);
+  transform: translateY(-2px);
+}
+
+/* Active State - Fluid Blob Effect */
+.gooey-nav-item.active {
+  transform: translateY(-8px);
+}
+
+.gooey-nav-item.active .gooey-icon-wrapper {
+  transform: scale(1.25);
+  background: linear-gradient(135deg, var(--item-color, #667eea) 0%, rgba(255, 255, 255, 0.15) 100%);
+  border-color: var(--item-color, #667eea);
+  box-shadow: 
+    0 8px 24px var(--item-color, #667eea),
+    0 0 40px var(--item-color, #667eea),
+    0 0 60px var(--item-color, #667eea);
+  animation: activeIconPulse 2s ease-in-out infinite;
+}
+
+.gooey-nav-item.active .gooey-icon-wrapper::before {
+  opacity: 0.4;
+}
+
+.gooey-nav-item.active .gooey-icon-wrapper i {
+  color: #ffffff;
+  transform: scale(1.15);
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+  animation: iconFloat 3s ease-in-out infinite;
+}
+
+.gooey-nav-item.active .gooey-label {
+  color: var(--item-color, #667eea);
+  font-weight: 700;
+  transform: translateY(-4px);
+  text-shadow: 0 0 10px var(--item-color, #667eea);
+}
+
+/* Gooey Ripple Effect - Active Item */
+.gooey-ripple {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ripple-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border: 2px solid var(--item-color, #667eea);
+  border-radius: 50%;
+  opacity: 0;
+  animation: rippleExpand 2s ease-out infinite;
+}
+
+.ripple-circle:nth-child(2) {
+  animation-delay: 0.7s;
+}
+
+.ripple-circle:nth-child(3) {
+  animation-delay: 1.4s;
+}
+
+@keyframes rippleExpand {
+  0% {
+    width: 44px;
+    height: 44px;
+    opacity: 0.6;
+  }
+  100% {
+    width: 80px;
+    height: 80px;
+    opacity: 0;
+  }
+}
+
+@keyframes activeIconPulse {
+  0%, 100% {
+    box-shadow: 
+      0 8px 24px var(--item-color, #667eea),
+      0 0 40px var(--item-color, #667eea),
+      0 0 60px var(--item-color, #667eea);
+  }
+  50% {
+    box-shadow: 
+      0 8px 32px var(--item-color, #667eea),
+      0 0 50px var(--item-color, #667eea),
+      0 0 80px var(--item-color, #667eea);
+  }
+}
+
+@keyframes iconFloat {
+  0%, 100% {
+    transform: scale(1.15) translateY(0);
+  }
+  50% {
+    transform: scale(1.15) translateY(-4px);
+  }
+}
+
+/* Active State Pressed Effect */
+.gooey-nav-item:active {
+  transform: translateY(-4px) scale(0.95);
+}
+
+.gooey-nav-item.active:active {
+  transform: translateY(-6px) scale(0.98);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 480px) {
+  .gooey-nav {
+    padding: 8px 8px 16px;
+  }
+
+  .gooey-nav-container {
+    padding: 8px 4px;
+    border-radius: 28px;
+  }
+
+  .gooey-nav-item {
+    padding: 6px 8px;
+    min-width: 52px;
+    gap: 2px;
+  }
+
+  .gooey-icon-wrapper {
+    width: 38px;
+    height: 38px;
+  }
+
+  .gooey-icon-wrapper i {
+    font-size: 18px;
+  }
+
+  .gooey-label {
+    font-size: 0.65rem;
+  }
+
+  .gooey-indicator {
+    height: 50px;
+  }
+}
+
+/* Smooth Entry Animation */
+.gooey-nav {
+  animation: slideUpFadeIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideUpFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Glass Reflection Overlay */
+.gooey-nav-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  border-radius: 32px 32px 0 0;
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* Optional: Morphing Blob Background Effect */
+@keyframes blobMorph {
+  0%, 100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  25% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+  50% {
+    border-radius: 50% 60% 30% 60% / 30% 40% 70% 50%;
+  }
+  75% {
+    border-radius: 60% 40% 60% 40% / 70% 30% 50% 60%;
+  }
+}
+
+/* Enhance gooey effect on active item */
+.gooey-nav-item.active .gooey-icon-wrapper {
+  animation: activeIconPulse 2s ease-in-out infinite, blobMorph 8s ease-in-out infinite;
+}

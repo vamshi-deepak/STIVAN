@@ -1,0 +1,160 @@
+/* ===========================
+   FLOATING TOGGLE BUTTON
+   =========================== */
+
+.floating-toggle-button {
+  position: fixed;
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 1.5rem;
+  cursor: grab;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.5),
+              0 0 0 0 rgba(102, 126, 234, 0.4);
+  animation: floatIn 0.6s ease-out;
+  touch-action: none;
+  user-select: none;
+}
+
+@keyframes floatIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.floating-toggle-button:hover:not(.dragging) {
+  transform: scale(1.05);
+  box-shadow: 0 12px 32px rgba(102, 126, 234, 0.6),
+              0 0 0 8px rgba(102, 126, 234, 0.2);
+}
+
+.floating-toggle-button:active:not(.dragging) {
+  transform: scale(0.98);
+}
+
+.floating-toggle-button.dragging {
+  cursor: grabbing;
+  transform: scale(1.1);
+  box-shadow: 0 16px 40px rgba(102, 126, 234, 0.7),
+              0 0 0 12px rgba(102, 126, 234, 0.3);
+  transition: none;
+}
+
+.floating-toggle-button.open {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  transform: rotate(90deg);
+}
+
+.floating-toggle-button.open:hover {
+  transform: rotate(90deg) translateY(-4px) scale(1.05);
+  box-shadow: 0 12px 32px rgba(239, 68, 68, 0.6),
+              0 0 0 8px rgba(239, 68, 68, 0.2);
+}
+
+.toggle-icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.toggle-icon-wrapper i {
+  transition: all 0.3s ease;
+}
+
+.floating-toggle-button:hover .toggle-icon-wrapper i {
+  transform: scale(1.1);
+}
+
+/* Unread Badge */
+.unread-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 20px;
+  height: 20px;
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6px;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.5);
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* Pulse Ring Effect */
+.pulse-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border: 3px solid rgba(102, 126, 234, 0.6);
+  border-radius: 50%;
+  animation: pulse 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+  pointer-events: none;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .floating-toggle-button {
+    bottom: 100px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    font-size: 1.3rem;
+  }
+
+  .unread-badge {
+    min-width: 18px;
+    height: 18px;
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .floating-toggle-button {
+    bottom: 90px;
+    right: 15px;
+    width: 52px;
+    height: 52px;
+    font-size: 1.2rem;
+  }
+}

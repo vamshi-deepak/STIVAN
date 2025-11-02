@@ -1,0 +1,1 @@
+.anim-card{background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--shadow-sm);margin-bottom:10px;cursor:pointer}.anim-card.selected{box-shadow:0 12px 30px rgba(20,20,50,0.12)}

@@ -1,0 +1,203 @@
+/* Import a professional font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+/* Define color variables for easy management */
+:root {
+  --primary-color: #6a11cb;
+  --secondary-color: #2575fc;
+  --background-color: #0a0a0f; /* Dark theme background */
+  --page-background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%); /* Dark gradient background */
+  --card-background: rgba(10, 10, 20, 0.6);
+  --text-color: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --shadow-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Apply global styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
+  background-attachment: fixed;
+  color: var(--text-color);
+  overflow-x: hidden; /* prevent horizontal scrollbar */
+}
+
+html { 
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; 
+  width: 100%;
+  background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
+  background-attachment: fixed;
+}
+
+/* Ensure predictable sizing and responsive media */
+*, *::before, *::after { box-sizing: border-box; }
+img, video, canvas, svg { max-width: 100%; height: auto; }
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: transparent;
+  margin: 0;
+  padding: 0;
+}
+
+.main-content {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 80px; /* Add padding to account for fixed header (80px height) */
+  position: relative;
+  z-index: 1; /* Ensure content stays below header */
+  justify-content: center;
+  /* leave room at the bottom so floating panels or content don't get hidden behind the footer */
+  padding-bottom: 140px;
+}
+
+/* Prevent horizontal scrolling */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* ===================================
+   MOBILE OPTIMIZATION UTILITIES
+   =================================== */
+
+/* Disable tap highlight on interactive elements */
+button, a, .button, .nav-item, .clickable {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+/* Smooth iOS scrolling */
+.scrollable, .chat-messages, .feed-container, .profile-content {
+  -webkit-overflow-scrolling: touch;
+  will-change: scroll-position;
+}
+
+/* Prevent zoom on double-tap */
+button, .button, .no-zoom {
+  touch-action: manipulation;
+}
+
+/* Ensure minimum touch targets (44px × 44px for iOS/Android) */
+button, .button, a.button, .nav-item, .toggle-switch, .tab-button, .chip {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* iOS Safe Area Support (for iPhone notch/home indicator) */
+.safe-area-top {
+  padding-top: max(20px, env(safe-area-inset-top));
+}
+
+.safe-area-bottom {
+  padding-bottom: max(20px, env(safe-area-inset-bottom));
+}
+
+/* Prevent iOS input zoom (minimum 16px font size) */
+input, textarea, select {
+  font-size: 16px !important;
+}
+
+/* Mobile-specific utilities */
+@media (max-width: 768px) {
+  /* Utility classes for mobile visibility */
+  .hide-mobile {
+    display: none !important;
+  }
+  
+  .show-mobile {
+    display: block !important;
+  }
+  
+  .full-width-mobile {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Reduce blur on mobile for better performance */
+  .glass-card, .chat-card, .settings-card, .profile-card, .community-card {
+    backdrop-filter: blur(15px) !important;
+  }
+
+  /* Faster animations on mobile */
+  * {
+    animation-duration: 0.3s !important;
+    transition-duration: 0.3s !important;
+  }
+
+  /* Adjust main content padding for mobile */
+  .main-content {
+    padding-bottom: 100px;
+    padding-top: 70px; /* Account for fixed header */
+  }
+
+  /* Ensure modals/dropdowns are accessible */
+  .modal, .dropdown, .popup {
+    max-width: calc(100vw - 32px);
+    max-height: calc(100vh - 32px);
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra compact spacing for small phones */
+  .main-content {
+    padding-bottom: 80px;
+    padding-top: 60px;
+  }
+
+  /* Reduce hero sizes on small phones */
+  .hero-title, .page-title {
+    font-size: 2rem !important;
+  }
+
+  .hero-subtitle, .page-subtitle {
+    font-size: 0.95rem !important;
+  }
+}
+
+/* Accessibility: Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .glass-card, .chat-card, .settings-card {
+    border: 2px solid rgba(255, 255, 255, 0.5);
+  }
+
+  button, .button {
+    border: 2px solid currentColor;
+  }
+}
+
+/* ===================================
+   FLOATING CHAT BODY LOCK
+   =================================== */
+body.floating-chat-open {
+  overflow: hidden;
+}
+
+body.chat-modal-open {
+  overflow: hidden;
+}

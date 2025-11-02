@@ -1,0 +1,91 @@
+.aurora-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+  background: linear-gradient(180deg, #0a0a0f 0%, #1a1a2e 100%);
+}
+
+.aurora-gradient {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.6;
+  mix-blend-mode: screen;
+}
+
+.aurora-gradient-1 {
+  background: radial-gradient(circle, rgba(106, 17, 203, 0.8) 0%, transparent 60%);
+  top: -50%;
+  left: -50%;
+  animation: aurora-move-1 20s ease-in-out infinite alternate;
+}
+
+.aurora-gradient-2 {
+  background: radial-gradient(circle, rgba(37, 117, 252, 0.7) 0%, transparent 60%);
+  top: -30%;
+  right: -50%;
+  animation: aurora-move-2 25s ease-in-out infinite alternate;
+}
+
+.aurora-gradient-3 {
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.6) 0%, transparent 60%);
+  bottom: -50%;
+  left: 20%;
+  animation: aurora-move-3 30s ease-in-out infinite alternate;
+}
+
+.aurora-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+  pointer-events: none;
+}
+
+@keyframes aurora-move-1 {
+  0% {
+    transform: translate(0%, 0%) scale(1);
+  }
+  50% {
+    transform: translate(10%, 15%) scale(1.1);
+  }
+  100% {
+    transform: translate(-5%, 10%) scale(0.9);
+  }
+}
+
+@keyframes aurora-move-2 {
+  0% {
+    transform: translate(0%, 0%) scale(1);
+  }
+  50% {
+    transform: translate(-15%, 10%) scale(1.2);
+  }
+  100% {
+    transform: translate(5%, -10%) scale(0.95);
+  }
+}
+
+@keyframes aurora-move-3 {
+  0% {
+    transform: translate(0%, 0%) scale(1);
+  }
+  50% {
+    transform: translate(8%, -12%) scale(1.15);
+  }
+  100% {
+    transform: translate(-10%, 8%) scale(0.9);
+  }
+}

@@ -1,0 +1,188 @@
+/* ===========================
+   FLOATING INPUT BAR (PERSISTENT)
+   =========================== */
+
+.floating-input-bar {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 800px;
+  z-index: 8000;
+  animation: slideUpFade 0.5s ease-out;
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.input-bar-form {
+  width: 100%;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(20, 20, 40, 0.95);
+  backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+  padding: 14px 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
+              0 0 0 1px rgba(106, 17, 203, 0.3);
+  transition: all 0.3s ease;
+}
+
+.input-wrapper:hover {
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6),
+              0 0 0 2px rgba(106, 17, 203, 0.5);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.input-wrapper:focus-within {
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7),
+              0 0 0 3px rgba(106, 17, 203, 0.6);
+  border-color: rgba(102, 126, 234, 0.5);
+}
+
+.input-icon {
+  font-size: 1.3rem;
+  color: #667eea;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 8px rgba(102, 126, 234, 0.5));
+}
+
+.floating-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  resize: none;
+  max-height: 120px;
+  min-height: 24px;
+  line-height: 1.5;
+  overflow-y: auto;
+}
+
+.floating-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.floating-input::-webkit-scrollbar {
+  width: 6px;
+}
+
+.floating-input::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+.ask-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 16px;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  flex-shrink: 0;
+  min-width: 120px;
+}
+
+.ask-button:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.6);
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.ask-button:active:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.ask-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ask-button i {
+  font-size: 1rem;
+}
+
+.ask-button .fa-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .floating-input-bar {
+    bottom: 20px;
+    width: 95%;
+  }
+
+  .input-wrapper {
+    padding: 12px 16px;
+    border-radius: 20px;
+  }
+
+  .input-icon {
+    font-size: 1.1rem;
+  }
+
+  .floating-input {
+    font-size: 0.95rem;
+  }
+
+  .ask-button {
+    padding: 10px 18px;
+    font-size: 0.9rem;
+    min-width: 100px;
+  }
+
+  .ask-button span {
+    display: none;
+  }
+
+  .ask-button i {
+    margin: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .floating-input-bar {
+    bottom: 15px;
+  }
+
+  .input-wrapper {
+    padding: 10px 14px;
+    gap: 10px;
+  }
+
+  .ask-button {
+    padding: 10px 16px;
+    min-width: auto;
+  }
+}

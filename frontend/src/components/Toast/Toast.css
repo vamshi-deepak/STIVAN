@@ -1,0 +1,162 @@
+:root{
+  --toast-width: 320px;
+  --toast-padding: 14px;
+  --accent-success: #2DD4BF;
+  --accent-error: #FF6B6B;
+  --accent-info: #7C83FD;
+  --bg-glass: rgba(255,255,255,0.06);
+  --shadow-1: 0 6px 18px rgba(9,10,14,0.25);
+  --shadow-2: 0 2px 8px rgba(9,10,14,0.06);
+  --glass-border: rgba(255,255,255,0.08);
+  --text: #F7FAFC;
+  --muted: #CBD5E1;
+  --radius: 12px;
+}
+
+/* Entrance/Exit */
+@keyframes toastIn {
+  from { transform: translateY(12px) scale(0.98); opacity: 0; }
+  to   { transform: translateY(0) scale(1);    opacity: 1; }
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+
+/* Container */
+.toast {
+  width: var(--toast-width);
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: var(--toast-padding);
+  border-radius: var(--radius);
+  color: #ffffff; /* make message text white by default */
+  background: var(--accent-info); /* fallback */
+  box-shadow: var(--shadow-1);
+  transform-origin: top right;
+  animation: toastIn 240ms cubic-bezier(.2,.9,.3,1);
+  position: fixed; /* fixed in viewport */
+  top: 100px; /* position from top */
+  right: 20px; /* show on right side */
+  z-index: 9999;
+  overflow: hidden;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+/* Hover lift */
+.toast:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(9,10,14,0.30);
+}
+
+/* Icon */
+.toast-icon {
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 18px;
+  color: rgba(255,255,255,0.95);
+  flex-shrink: 0;
+  box-shadow: var(--shadow-2);
+  background: rgba(0,0,0,0.12);
+  transform: translateZ(0);
+}
+
+/* Message text */
+.toast p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.3;
+  color: #ffffff;
+  flex: 1 1 auto;
+  word-break: break-word;
+}
+
+/* Close button */
+.toast-close-btn{
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.9);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  transition: background 120ms ease, color 120ms ease, transform 120ms ease;
+  display: inline-grid;
+  place-items: center;
+}
+.toast-close-btn:hover{
+  background: rgba(255,255,255,0.08);
+  color: #ffffff;
+  transform: scale(1.03);
+}
+
+/* Variant styles */
+.toast-success .toast-icon {
+  background: linear-gradient(135deg, rgba(45,212,191,1), rgba(16,185,129,0.95));
+  color: rgba(255,255,255,0.95);
+  box-shadow: 0 6px 18px rgba(34,197,94,0.18);
+}
+.toast-error .toast-icon {
+  background: linear-gradient(135deg, rgba(255,107,107,1), rgba(255,90,90,0.95));
+  color: rgba(255,255,255,0.95);
+  box-shadow: 0 6px 18px rgba(255,99,99,0.18);
+  animation: pulse 2.2s ease-in-out infinite;
+}
+.toast-info .toast-icon {
+  background: linear-gradient(135deg, rgba(124,131,253,1), rgba(59,130,246,0.95));
+  color: rgba(255,255,255,0.95);
+  box-shadow: 0 6px 18px rgba(99,102,241,0.12);
+}
+
+/* Subtle left stripe for visual identity */
+.toast::before{ display:none; }
+
+/* Variant styles now color the whole toast background so message is readable */
+.toast-success { background: linear-gradient(135deg, rgba(45,212,191,1), rgba(16,185,129,0.95)); }
+.toast-error   { background: linear-gradient(135deg, rgba(255,107,107,1), rgba(255,90,90,0.95)); }
+.toast-info    { background: linear-gradient(135deg, rgba(124,131,253,1), rgba(59,130,246,0.95)); }
+
+/* Responsive tweaks */
+@media (max-width: 420px){
+  :root { --toast-width: calc(100vw - 32px); }
+  .toast { padding: 12px; gap: 10px; border-radius: 10px; }
+  .toast-icon { min-width: 40px; min-height: 40px; font-size: 16px; border-radius: 8px; }
+  .toast p { font-size: 13px; }
+}
+
+/* Utility small helper if you want a compact variant */
+.toast.compact {
+  --toast-width: 260px;
+  padding: 10px;
+  gap: 8px;
+}
+
+.toast {
+  position: fixed;
+  top: 100px; /* Increase this value to show below navbar */
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 24px;
+  border-radius: 8px;
+  color: white;
+  z-index: 9999; /* Increase z-index to show above navbar */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: slideIn 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.toast.error {
+  background-color: #ff4d4f;
+}
+
+.toast.success {
+  background-color: #52c41a;
+}
